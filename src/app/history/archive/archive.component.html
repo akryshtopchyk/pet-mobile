@@ -1,0 +1,43 @@
+<ion-grid class="ion-no-padding">
+  <ion-row *ngFor="let el of elements" class="ion-no-padding">
+    <ion-card class="ion-no-padding" style="width: 100%; margin: 16px">
+      <ion-grid>
+        <ion-row>
+          <div class="card-title">
+            <p>{{el.from}}</p>
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+            <p>{{el.to}}</p>
+          </div>
+        </ion-row>
+        <ion-row>
+          <div class="card-time">
+            <p>{{el.startTime}}</p>
+            <p>{{el.endTime}}</p>
+          </div>
+        </ion-row>
+        <ion-row>
+          <div class="card-stops">
+            <p>{{el.startStop}}</p>
+            <p>{{el.endStop}}</p>
+          </div>
+        </ion-row>
+        <ion-row>
+          <div class="card-info">
+            <div class="card-info__date">
+              <ion-icon style="color: #fff" name="calendar-outline"></ion-icon>
+              <p>{{el.date}}</p>
+            </div>
+            <div class="card-info__sum">
+              <ion-icon style="color: #fff" name="cash-outline"></ion-icon>
+              <p>{{el.sum}} BYN</p>
+            </div>
+            <div class="card-info__place">
+              <ion-icon style="color: #fff" name="person-outline"></ion-icon>
+              <p>{{el.place}} {{el.place > 1 ? 'места' : 'место'}}</p>
+            </div>
+          </div>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-row>
+</ion-grid>

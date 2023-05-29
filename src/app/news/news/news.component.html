@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Новости</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item class="ion-no-padding" *ngFor="let newsItem of news ">
+      <ion-grid>
+        <ion-row class="ion-no-padding;">
+          <div style="display: flex;width: 100%;align-items: center;justify-content: space-between;">
+            <h1>{{newsItem.title}}</h1>
+            <h6>{{getDate(newsItem.createdAt)}}</h6>
+          </div>
+          <p style="hyphens: auto;">{{newsItem.text}}</p>
+        </ion-row>
+      </ion-grid>
+  </ion-item>
+</ion-content>

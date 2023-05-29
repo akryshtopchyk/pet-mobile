@@ -1,0 +1,81 @@
+<ion-header *ngIf="isCalendarOpen">
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="onCalendarToggle()">
+      <ion-icon style="color: #024b38;" name="close" size="large"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" style="position: relative;" id="calendar-container" *ngIf="isCalendarOpen">
+      <ion-datetime style="position: absolute;"  [firstDayOfWeek]="1"
+      class="calendar ion-no-padding" [isDateEnabled]="isDateEnabled" [value]=date.toISOString() presentation="date"
+        (ionChange)="onCalendarChange($event)"></ion-datetime>
+</ion-content>
+
+<ion-content class="select-content ion-padding" [fullscreen]="true" class="ion-padding" *ngIf="!isCalendarOpen">
+  <h1 class="title" style="color: white">YanovMinsk</h1>
+  <h6 class="subtitle" style="color: white">Маршрутное такси</h6>
+  <h3 class="title" style="color: white" *ngIf="!this.availableDates.length">Маршрутов не найдено</h3>
+  <h3 class="title" style="color: white" *ngIf="this.availableDates.length">Поиск мест</h3>
+  <ion-card *ngIf="this.availableDates">
+    <ion-card-content class="routes">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div class="routes-selects">
+              <ion-item class="ion-no-padding" style="width: 100% !important;">
+                <ion-select class="custom" [value]="currentCity" (ionChange)="handleChange($event)" interface="popover"
+                  style="width: 100% !important;">
+                  <ion-select-option style="width: 100% !important;" *ngFor="let city of cityList" [value]="city">{{ city.name }}</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item class="ion-no-padding">
+                <ion-select [value]="currentCity.id === 1 ? cityList[1] : cityList[0]" interface="popover"
+                  style="width: 100%;">
+                  <ion-select-option [value]="currentCity.id === 1 ? cityList[1] : cityList[0]">
+                    {{ (currentCity.id === 1 ? cityList[1] : cityList[0]).name }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </div>
+          </ion-col>
+          <ion-col size="auto" class="routes-swap">
+            <ion-button (click)="onSwapClick()" fill="outline">
+              <ion-icon name="swap-vertical-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="this.availableDates.length">
+    <ion-card-content class="time">
+      <ion-grid class="ion-no-padding">
+        <ion-row class="time-row">
+          <ion-col class="ion-no-padding time-row_date">
+            <ion-button expand="block" (click)="onCalendarToggle()">{{getDateFormat()}}</ion-button>
+          </ion-col>
+          <ion-col class="ion-no-padding time-row_people">
+            <ion-icon class="icon" name="person-outline"></ion-icon>
+            <ion-button class="ion-no-padding" size="small" fill="outline" (click)="minusPeople()"
+              [disabled]="peopleCount === 1">
+              <ion-icon slot="icon-only" name="remove-outline"></ion-icon>
+            </ion-button>
+            <p>{{peopleCount}}</p>
+            <ion-button class="ion-no-padding" size="small" fill="outline" (click)="plusPeople()"
+              [disabled]="peopleCount === 3">
+              <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="nav" *ngIf="this.availableDates.length">
+    <ion-nav-link router-direction="forward" [component]="stops">
+      <ion-button style="margin: 0;" (click)="onNavClick()">Найти билеты</ion-button>
+    </ion-nav-link>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,144 @@
+#calendar-container {
+  --background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  main {
+    padding: 0 !important;
+  }
+}
+
+
+ion-content {
+  --background: none;
+  --background: url('../../../assets/background.jpg') no-repeat center/cover;
+  // background-position: center;
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // position: relative;
+}
+
+scroll-y {
+  overflow-y: none !important;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 64px;
+  margin-bottom: 0;
+}
+
+.subtitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+}
+
+.routes {
+  display: flex;
+  width: 100%;
+  padding: 8px;
+}
+
+.routes-selects {
+  width: 100%;
+  margin-right: 8px;
+}
+
+.routes-swap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.time {
+  display: flex;
+  justify-content: space-between;
+}
+
+.time-calendar {
+  width: 49%;
+}
+
+.time-peoples {
+  width: 49%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar {
+  position: absolute;
+  z-index: 100;
+  margin: 0;
+  padding: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.nav {
+  background: none;
+  box-shadow: none;
+  border: 1px solid #fff;
+  // position: absolute;
+  // bottom: 10%;
+  // width: 95%;
+
+  * {
+    width: 100%;
+  }
+}
+
+.time-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.time-row_people {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .icon {
+    margin-left: 16px;
+  }
+}
+
+.time-row_date {
+  padding-right: 8px;
+  border-right: 1px solid;
+}
+
+.select-content {
+  display: flex;
+}
+
+.native-wrapper {
+  width: 100% !important;
+}
+
+ion-select.custom {
+  width: 100% !important;
+}
+
+:root{
+  ion-select.select-wrapper.native-wrapper {
+    width: 100% !important;
+  }
+}
+ion-select {
+  width: 100%;
+
+  justify-content: center;
+}
+
+ion-select::part(placeholder),
+ion-select::part(text) {
+  flex: 0 0 auto;
+  width: 100% !important;
+}

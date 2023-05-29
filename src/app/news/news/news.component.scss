@@ -1,0 +1,25 @@
+
+
+.select-stop {
+  display: flex;
+  width: 100%;
+  justify-content: start;
+    align-items: center;
+  p {
+    padding: 0;
+    margin: 0;
+  }
+  .select-stop__container {
+    margin-left: 8px;
+    .select-stop__title {
+      font-size: 16px;
+    }
+    .select-stop__subtitle {
+      font-size: 12px;
+    }
+  }
+}
+
+.link {
+  width: 100%;
+}

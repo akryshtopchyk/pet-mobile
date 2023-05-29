@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Поездки
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-segment (ionChange)="segmentChanged($event)" value="future">
+        <ion-segment-button value="future">
+          <ion-label>Запланированные</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="archive">
+          <ion-label>История</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-row>
+    <app-future (newItemEvent)="refresh($event)" *ngIf="segmentValue === 'future'" [elements]="orders.future"></app-future>
+    <app-archive *ngIf="segmentValue === 'archive'" [elements]="orders.archive"></app-archive>
+    <ion-row >
+      <ion-button style="margin-top: 8px; width: 100%;" (click)="onRefresh()">
+        <ion-icon name="reload-outline"></ion-icon>
+        <div style="margin-left: 8px;">Обновить</div>
+      </ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>

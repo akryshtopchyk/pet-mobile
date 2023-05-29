@@ -1,0 +1,139 @@
+<ion-header *ngIf="isSelectOpen">
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="onSelectToggle()">
+      <ion-icon style="color: #024b38;" name="close" size="large"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="calendar-container" *ngIf="isSelectOpen">
+  <ion-grid>
+    <ion-row (click)="setPaymentMethod(1)">
+      <ion-item class="ion-no-padding"
+        style="width: 100%; display: flex; justify-content: center; align-items: center;">
+        <div>Наличными водителю</div>
+      </ion-item>
+    </ion-row>
+    <ion-row (click)="setPaymentMethod(2)">
+      <ion-item class="ion-no-padding"
+        style="width: 100%; display: flex; justify-content: center; align-items: center;">
+        <div>Картой водителю</div>
+      </ion-item>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-header *ngIf="isSelectSeatOpen">
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="onSelectSeatToggle()">
+      <ion-icon style="color: #024b38;" name="close" size="large"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="calendar-container" *ngIf="isSelectSeatOpen">
+  <ion-grid>
+    
+  </ion-grid>
+</ion-content>
+
+<ion-header *ngIf="!isSelectOpen && !isSelectSeatOpen">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Назад"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Бронирование
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" *ngIf="!isSelectOpen && !isSelectSeatOpen">
+  <ion-item class="ion-no-padding">
+    <ion-grid class="ion-no-padding">
+      <ion-row class="ion-no-padding">
+        <div class="info-container">
+          <div class="card-info__date">
+            <ion-icon style="color: #fff" name="calendar-outline"></ion-icon>
+            <p>{{getDateFormat()}}</p>
+          </div>
+          <div class="card-info__place">
+            <ion-icon style="color: #fff" class="icon" name="person-outline"></ion-icon>
+            <p>{{peopleCount}} {{peopleCount > 1 ? 'места' : 'место'}}</p>
+          </div>
+        </div>
+      </ion-row>
+      <ion-row class="ion-no-padding">
+        <div class="select-stop">
+          <div class="icon-container">
+            <ion-icon style="color: #fff" name="bus-outline" ize="large"></ion-icon>
+          </div>
+          <div class="select-stop__container">
+            <p class="select-stop__title">Место посадки</p>
+            <p class="select-stop__subtitle">{{placeFrom?.name}}</p>
+          </div>
+          <div style="margin-left: auto;" class="select-stop__container">
+            <p class="select-stop__title">Время посадки</p>
+            <p class="select-stop__subtitle">{{start}}</p>
+          </div>
+        </div>
+      </ion-row>
+
+      <ion-row class="ion-no-padding">
+        <div class="select-stop" style="margin-top: 16px; margin-bottom: 16px;">
+          <div class="icon-container">
+            <ion-icon style="color: #fff" name="bus-outline" ize="large"></ion-icon>
+          </div>
+          <div class="select-stop__container">
+            <p class="select-stop__title">Место высадки</p>
+            <p class="select-stop__subtitle">{{placeTo?.name}}</p>
+          </div>
+          <div style="margin-left: auto;" class="select-stop__container">
+            <p class="select-stop__title">Время высадки</p>
+            <p class="select-stop__subtitle">{{end}}</p>
+          </div>
+        </div>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+  <ion-item class="ion-no-padding">
+    <ion-grid class="ion-no-padding">
+      <ion-row class="ion-no-padding">
+        <h5 style="margin: 0; padding: 0; margin-top: 8px;">Комментарий</h5>
+      </ion-row>
+      <ion-row class="ion-no-padding">
+          <ion-item class="ion-no-padding" style="width: 100%; margin-bottom: 8px;">
+            <ion-input [clearInput]="true" [(ngModel)]="comment"></ion-input>
+          </ion-item>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+  <ion-item class="ion-no-padding">
+    <ion-grid class="ion-no-padding">
+      <ion-row class="ion-no-padding">
+        <h5 style="margin: 0; padding: 0; margin-top: 8px;">Способ оплаты</h5>
+      </ion-row>
+      <ion-row class="ion-no-padding">
+        <div>
+          <p>Сумма</p>
+          <p>{{sum * peopleCount}} BYN</p>
+        </div>
+      </ion-row>
+      <ion-row class="ion-no-padding" (click)="onSelectToggle()">
+        <div class="select-stop" style="margin-bottom: 16px;">
+          <div class="icon-container">
+            <ion-icon style="color: #fff" name="cash-outline"></ion-icon>
+          </div>
+          <div class="select-stop__container">
+            <p class="select-stop__title">Водителю</p>
+            <p class="select-stop__subtitle">{{paymentMethod === 1 ? 'Наличными' : 'Картой'}}</p>
+          </div>
+          <ion-icon style="margin-left: auto;" name="chevron-forward-outline" size="large"></ion-icon>
+        </div>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+  <ion-card class="nav">
+    <ion-button (click)="onClick()">Забронировать</ion-button>
+  </ion-card>
+</ion-content>

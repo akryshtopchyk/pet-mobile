@@ -1,0 +1,123 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons (click)="onBack()" *ngIf="isLogin || isRegistration" slot="start"
+      style="color: var(--ion-color-primary, #024b38)">
+      <ion-icon name="chevron-back-outline" size="large"></ion-icon>
+      <span part="text" aria-hidden="true" class="button-text">Назад</span>
+    </ion-buttons>
+    <ion-title>Профиль</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding" *ngIf="!firstName && !isLogin && !isRegistration">
+  <ion-grid class="ion-no-padding" style="position: relative; height: 100%;">
+    <ion-row>
+      <h3>Вы не авторизованы</h3>
+    </ion-row>
+    <ion-row>
+      <ion-button style="margin-top: 8px; width: 100%;" (click)="onLogin()">
+        <ion-icon name="log-in-outline"></ion-icon>
+        <div style="margin-left: 8px;">Войти</div>
+      </ion-button>
+    </ion-row>
+    <ion-row>
+      <ion-button style="margin-top: 8px; width: 100%;" (click)="onRegister()">
+        <ion-icon name="person-add-outline"></ion-icon>
+        <div style="margin-left: 8px;">Зарегистрироваться</div>
+      </ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="isRegistration" class="ion-padding">
+  <ion-grid class="ion-no-padding" style="position: relative; height: 100%;">
+    <ion-row>
+      <ion-item class="ion-no-padding" style="width: 100%;">
+        <ion-label>Имя:</ion-label>
+        <ion-input [clearInput]="true" [(ngModel)]="registerFirstName"></ion-input>
+      </ion-item>
+      <ion-item class="ion-no-padding" style="width: 100%;">
+        <ion-label>Фамилия:</ion-label>
+        <ion-input [clearInput]="true" [(ngModel)]="registerLastName"></ion-input>
+      </ion-item>
+      <ion-item class="ion-no-padding" style="width: 100%;">
+        <ion-label>Номер телефона:</ion-label>
+        <ion-input type="tel" [clearInput]="true" [(ngModel)]="registerPhoneNumber" placeholder="+375*********"></ion-input>
+      </ion-item>
+      <ion-item class="ion-no-padding" style="width: 100%;">
+        <ion-label>Пароль:</ion-label>
+        <ion-input [type]="getType()" [(ngModel)]="registerPassword"></ion-input>
+        <ion-icon name="eye" item-right (click)="toggleTextPassword()"></ion-icon>
+      </ion-item>
+    </ion-row>
+    <ion-row *ngIf="isError">
+      <p style="color: #b50909;">Проверьте корректно ли введен номер телефона (+375*********) и пароль (длина должна превышать 6 символов)</p>
+    </ion-row>
+    <ion-row>
+      <ion-button style="margin-top: 8px; width: 100%;" (click)="register()">
+        <ion-icon name="person-add-outline"></ion-icon>
+        <div style="margin-left: 8px;">Зарегистрироваться</div>
+      </ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="isLogin" class="ion-padding">
+  <ion-grid class="ion-no-padding" style="position: relative; height: 100%;">
+    <ion-row>
+      <ion-item class="ion-no-padding" style="width: 100%;">
+        <ion-label>Номер телефона:</ion-label>
+        <ion-input type="tel" [clearInput]="true" [(ngModel)]="loginPhoneNumber" placeholder="+375*********"></ion-input>
+      </ion-item>
+      <ion-item class="ion-no-padding" style="width: 100%;">
+        <ion-label>Пароль:</ion-label>
+        <ion-input [type]="getType()" [(ngModel)]="loginPassword"></ion-input>
+        <ion-icon name="eye" item-right (click)="toggleTextPassword()"></ion-icon>
+      </ion-item>
+      <ion-row *ngIf="isError">
+        <p style="color: #b50909;">Проверьте корректно ли введен номер телефона(+375*********) и пароль(длина должна превышать 6 символов)</p>
+      </ion-row>
+    </ion-row>
+    <ion-row>
+      <ion-button style="margin-top: 8px; width: 100%;" (click)="login()">
+        <ion-icon name="log-in-outline"></ion-icon>
+        <div style="margin-left: 8px;">Войти</div>
+      </ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="firstName" class="ion-padding">
+  <ion-grid class="ion-no-padding" style="position: relative; height: 100%;">
+    <ion-row>
+      <ion-item class="ion-no-padding" style="width: 100%;">
+        <ion-label>Имя: </ion-label>
+        <ion-input [clearInput]="true" [(ngModel)]="firstName"></ion-input>
+      </ion-item>
+      <ion-item class="ion-no-padding" style="width: 100%;">
+        <ion-label>Фамилия: </ion-label>
+        <ion-input [clearInput]="true" [(ngModel)]="lastName"></ion-input>
+      </ion-item>
+      <ion-item class="ion-no-padding" style="width: 100%;">
+        <ion-label >Номер телефона: </ion-label>
+        <ion-input disabled="true" [clearInput]="true" [(ngModel)]="phoneNumber"></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row *ngIf="isError">
+      <p style="color: #b50909;">Ошибка</p>
+    </ion-row>
+    <ion-row>
+      <ion-button style="margin-top: 8px; width: 100%;" (click)="save()">
+        <ion-icon name="reload-outline"></ion-icon>
+        <div style="margin-left: 8px;">Обновить</div>
+      </ion-button>
+    </ion-row>
+    <ion-row>
+      <ion-button style="margin-top: 8px; width: 100%;" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+        <div style="margin-left: 8px;">Выйти</div>
+      </ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>
