@@ -1,0 +1,7 @@
+{
+  "name": "YanovMinsk",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
